@@ -1,5 +1,7 @@
 .container-fluid {
     height: 100vh;
+    text-transform: capitalize;
+    background-color: aquamarine;
 }
 
 .platos-container{
@@ -19,4 +21,9 @@
 
 .row.contenedor {
     height: 50vh;
+}
+
+img {
+    width: 290px;
+    height: 174px;
 }

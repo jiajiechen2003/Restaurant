@@ -4,6 +4,10 @@ class Plato extends HTMLElement {
     this.shadow = this.attachShadow({ mode: "open" });
   }
 
+  get id() {
+    return this.getAttribute("id");
+  }
+
   get nombre() {
     return this.getAttribute("nombre");
   }
@@ -18,6 +22,10 @@ class Plato extends HTMLElement {
 
   get img() {
     return this.getAttribute("img");
+  }
+
+  set id(value) {
+    this.setAttribute("id", value);
   }
 
   set nombre(value) {
@@ -38,9 +46,15 @@ class Plato extends HTMLElement {
 
   render() {
     this.shadow.innerHTML = `
-            <p>Nombre: <span id="nombre">${this.nombre}</span></p>
-            <p>Precio: <span id="precio">${this.precio}</span></p>
-            <p>Alérgeno: <span id="alergeno">${this.alergenos}</span></p>
+            <style>
+                img {
+                    width: 290px;
+                    height: 220px;
+                }
+            </style>
+            <p>Nombre: ${this.nombre}</p>
+            <p>Precio: ${this.precio}€</p>
+            <p>Alérgeno: ${this.alergenos}</p>
             <img src="${this.img}"></img>
         `;
   }

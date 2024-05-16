@@ -35,7 +35,7 @@ const platos = [
 
 document.addEventListener("DOMContentLoaded", () => {
     platos.forEach(categoria => {
-        const container = document.querySelector('.col-6');
+        const container = document.querySelector(categoria.container);
         const platosContainer = container.querySelector('.platos-container');
         categoria.platos.forEach(plato => {
             const item = document.createElement('plato-element');
@@ -48,5 +48,3 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
 })
-
-

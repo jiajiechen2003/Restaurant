@@ -1,0 +1,22 @@
+.container-fluid {
+    height: 100vh;
+}
+
+.platos-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.col-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.row.contenedor {
+    height: 50vh;
+}

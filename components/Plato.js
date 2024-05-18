@@ -46,21 +46,42 @@ class Plato extends HTMLElement {
 
   render() {
     this.shadow.innerHTML = `
-            <style>
-                img {
-                    width: 290px;
-                    height: 220px;
-                }
-            </style>
-            <p>Nombre: ${this.nombre}</p>
-            <p>Precio: ${this.precio}€</p>
-            <p>Alérgeno: ${this.alergenos}</p>
-            <img src="${this.img}"></img>
-        `;
+      <style>
+        img {
+          width: 290px;
+          height: 200px;
+        }
+        button {
+          display: block;
+          margin-top: 10px;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+      </style>
+      <div class="plato-container">
+        <p>Nombre: ${this.nombre}</p>
+        <p>Precio: ${this.precio}€</p>
+        <p>Alérgenos: ${this.alergenos.join(', ')}</p>
+        <img src="${this.img}" alt="${this.nombre}">
+        <button>Añadir a la Comanda</button>
+      </div>
+    `;
+
+    this.shadow.querySelector('button').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('add-to-cart', {
+        detail: {
+          nombre: this.nombre,
+          img: this.img,
+          precio: this.precio
+        },
+        bubbles: true,
+        composed: true
+      }));
+    });
   }
 
   static get observedAttributes() {
-    return ["nombre", "precio", "alergenos"];
+    return ["nombre", "precio", "alergenos", "img"];
   }
 
   connectedCallback() {

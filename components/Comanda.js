@@ -3,6 +3,22 @@ class Comanda extends HTMLElement {
       super();
       this.shadow = this.attachShadow({ mode: "open" });
     }
+
+    render() {
+      this.shadow.innerHTML = `
+        <style>
+          .comanda-container {
+            margin-top: 20px;
+          }
+          .total {
+            margin-top: 20px;
+            font-weight: bold;
+          }
+        </style>
+        <div class="comanda-container"></div>
+        <div class="total">Total: 0.00€</div>
+      `;
+    }
   
     connectedCallback() {
       this.render();
@@ -39,22 +55,6 @@ class Comanda extends HTMLElement {
         this.total += precio * cantidad;
       });
       this.shadow.querySelector('.total').textContent = `Total: ${this.total.toFixed(2)}€`;
-    }
-  
-    render() {
-      this.shadow.innerHTML = `
-        <style>
-          .comanda-container {
-            margin-top: 20px;
-          }
-          .total {
-            margin-top: 20px;
-            font-weight: bold;
-          }
-        </style>
-        <div class="comanda-container"></div>
-        <div class="total">Total: 0.00€</div>
-      `;
     }
   }
   

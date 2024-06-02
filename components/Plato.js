@@ -53,7 +53,7 @@ class Plato extends HTMLElement {
           <img src="${this.img}" alt="${this.nombre}">
           <h5>${this.nombre}</h5>
           <h5 class="cantidad">Cantidad: ${this.cantidad}</h5>
-          <h5>Precio: ${(this.precio * this.cantidad).toFixed(2)}€</h5>
+          <h5 class="precio">Precio: ${(this.precio * this.cantidad).toFixed(2)}€</h5>
           <button class="disminuir">-</button>
           <button class="aumentar">+</button>
         </div>
@@ -75,22 +75,13 @@ class Plato extends HTMLElement {
   }
 
   eliminarElemento() {
+    this.actualizarCantidad();
     this.remove();
-    this.dispatchEvent(
-      new CustomEvent("actualizar-total", {
-        bubbles: true,
-        composed: true,
-      })
-    );
   }
 
   actualizarCantidad() {
-    this.shadow.querySelector(
-      ".cantidad"
-    ).textContent = `Cantidad: ${this.cantidad}`;
-    this.shadow.querySelector("h5:nth-child(4)").textContent = `Precio: ${(
-      this.precio * this.cantidad
-    ).toFixed(2)}€`;
+    this.shadow.querySelector(".cantidad").textContent = `Cantidad: ${this.cantidad}`;
+    this.shadow.querySelector(".precio").textContent = `Precio: ${(this.precio * this.cantidad).toFixed(2)}€`;
     this.dispatchEvent(
       new CustomEvent("actualizar-total", {
         bubbles: true,

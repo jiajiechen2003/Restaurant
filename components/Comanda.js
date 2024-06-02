@@ -2,7 +2,6 @@ class Comanda extends HTMLElement {
     constructor() {
       super();
       this.shadow = this.attachShadow({ mode: "open" });
-      this.total = 0;
     }
   
     connectedCallback() {
@@ -16,27 +15,27 @@ class Comanda extends HTMLElement {
       });
     }
   
-    agregarElemento(detail) {
-        const elementoExistente = this.shadow.querySelector(`plato-element[nombre="${detail.nombre}"]`);
+    agregarElemento(datos) {
+        const platoExiste = this.shadow.querySelector(`plato-element[nombre="${datos.nombre}"]`);
       
-        if (!elementoExistente) {
-          const elementoComanda = document.createElement('plato-element');
-          elementoComanda.setAttribute('nombre', detail.nombre);
-          elementoComanda.setAttribute('img', detail.img);
-          elementoComanda.setAttribute('precio', detail.precio);
-          this.shadow.querySelector('.comanda-container').appendChild(elementoComanda);
+        if (!platoExiste) {
+          const platosComanda = document.createElement('plato-element');
+          platosComanda.setAttribute('nombre', datos.nombre);
+          platosComanda.setAttribute('img', datos.img);
+          platosComanda.setAttribute('precio', datos.precio);
+          this.shadow.querySelector('.comanda-container').appendChild(platosComanda);
           this.calcularTotal();
         } else {
-          alert('¡Este plato ya está en la comanda!');
+          alert('Este plato ya está en la comanda');
         }
       }
       
   
     calcularTotal() {
       this.total = 0;
-      this.shadow.querySelectorAll('plato-element').forEach(elemento => {
-        const precio = Number(elemento.getAttribute('precio'));
-        const cantidad = Number(elemento.shadowRoot.querySelector('.cantidad').textContent.replace('Cantidad: ', ''));
+      this.shadow.querySelectorAll('plato-element').forEach(plato => {
+        const precio = Number(plato.getAttribute('precio'));
+        const cantidad = Number(plato.shadowRoot.querySelector('.cantidad').textContent.replace('Cantidad: ', ''));
         this.total += precio * cantidad;
       });
       this.shadow.querySelector('.total').textContent = `Total: ${this.total.toFixed(2)}€`;

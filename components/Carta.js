@@ -17,8 +17,7 @@ class Carta extends HTMLElement {
   }
 
   get alergenos() {
-    const alergenos = this.getAttribute("alergenos");
-    return alergenos ? alergenos.split("-") : [];
+    return this.getAttribute("alergenos").split("-");
   }
 
   get img() {
